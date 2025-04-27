@@ -1,0 +1,114 @@
+<p style="font-size: 16px; color: black;">Click Button 1 and Button 2, then Get Link will become available.</p>
+<p style="font-size: 16px; color: green;">লিংকটি ওপেন করতে ১ম বাটন এবং ২য় বাটন ক্লিক করুন, তারপর Get Link ওপেন হবে</p>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Link Activation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        a.button, button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            align-items: center;
+        }
+        .red-button {
+            background-color: #dc3545; /* Red background for buttons */
+        }
+        .green-button {
+            background-color: #28a745; /* Green background when clicked */
+        }
+        .red-button:hover {
+            background-color: #c82333; /* Darker red on hover */
+        }
+        .button .icon {
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        .disabled {
+            pointer-events: none;
+            background-color: #ccc;
+            color: #666;
+            cursor: not-allowed;
+        }
+        .active {
+            background-color: #007bff; /* Blue when active */
+            color: white;
+        }
+        .button:hover {
+            cursor: pointer; /* Hand cursor for clickable buttons */
+        }
+    </style>
+</head>
+<body>
+    <!-- Button 1 with Red Link and Right Arrow Icon -->
+    <a id="btn1" class="button red-button" href="https://www.google.com" target="_blank">
+        <span class="icon">👉</span> Click Here 1
+    </a>
+
+    <!-- Button 2 with Red Link and Right Arrow Icon -->
+    <a id="btn2" class="button red-button" href="https://www.google.com" target="_blank">
+        <span class="icon">👉</span> Click Here 2
+    </a>
+
+    <!-- Button 3 (Get Link, initially disabled) -->
+    <a id="btn3" class="button disabled" href="https://example.com" target="_blank">
+        <span class="icon">⬇️</span> Get Link
+    </a>
+
+    <script>
+        // Track button clicks
+        let btn1Clicked = false;
+        let btn2Clicked = false;
+
+        // Buttons
+        const btn1 = document.getElementById('btn1');
+        const btn2 = document.getElementById('btn2');
+        const btn3 = document.getElementById('btn3');
+
+        // Simulate Button 1 Click Tracking
+        btn1.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent immediate navigation
+            btn1Clicked = true;
+            btn1.classList.remove('red-button');
+            btn1.classList.add('green-button'); // Change color to green
+            checkButtons();
+            window.open(btn1.href, "_blank"); // Open Google
+        });
+
+        // Simulate Button 2 Click Tracking
+        btn2.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevent immediate navigation
+            btn2Clicked = true;
+            btn2.classList.remove('red-button');
+            btn2.classList.add('green-button'); // Change color to green
+            checkButtons();
+            window.open(btn2.href, "_blank"); // Open Google
+        });
+
+        // Enable Button 3 after both Button 1 and Button 2 are clicked
+        function checkButtons() {
+            if (btn1Clicked && btn2Clicked) {
+                btn3.classList.remove('disabled');
+                btn3.classList.add('active');
+                btn3.style.pointerEvents = "auto";
+                btn3.style.cursor = "pointer";
+            }
+        }
+    </script>
+</body>
+</html>
